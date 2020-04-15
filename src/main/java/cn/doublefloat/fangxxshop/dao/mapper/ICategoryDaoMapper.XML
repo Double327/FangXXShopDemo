@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="cn.doublefloat.fangxxshop.dao.ICategoryDao">
+
+    <insert id="addCategory" parameterType="cn.doublefloat.fangxxshop.entity.Category">
+        insert into shop_category values(#{id}, #{name}, #{goodsNum});
+    </insert>
+
+    <delete id="deleteCategory" parameterType="java.lang.String">
+        delete from shop_category where id = #{id};
+    </delete>
+
+    <update id="updateCategory" parameterType="cn.doublefloat.fangxxshop.entity.Category">
+        update shop_category set name = #{name}, goodsNum = #{goodsNum} where id = #{id};
+    </update>
+
+    <select id="findAllCategory" resultType="cn.doublefloat.fangxxshop.entity.Category">
+        select * from shop_category;
+    </select>
+
+    <select id="findCategoryById" parameterType="java.lang.String" resultType="cn.doublefloat.fangxxshop.entity.Category">
+        select * from shop_category where id = #{id};
+    </select>
+
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.doublefloat.fangxxshop.dao.IGoodsDao">
+    <insert id="addGoods" parameterType="goods">
+        insert into shop_goods values(#{id}, #{goodsno}, #{name}, #{categoryid}, #{price1}, #{price2}, #{stock}, #{thumbnail}, #{description}, #{role}, #{selltime}, #{sellnum}, #{score});
+    </insert>
+
+    <delete id="deleteGoods" parameterType="java.lang.String">
+        delete from shop_goods where id = #{id};
+    </delete>
+
+    <select id="findAllGoods" resultType="goods">
+        select * from shop_goods;
+    </select>
+
+    <select id="findGoodsByNames" resultType="goods">
+        select * from shop_goods
+        <where>
+            <foreach collection="array" open="and name in (" close=")" item="name" separator=",">
+                #{name}
+            </foreach>
+        </where>
+    </select>
+
+    <select id="findGoodsByIds" resultType="goods">
+        select * from shop_goods
+        <where>
+            <foreach collection="array" open="and id in (" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <select id="findGoodsByCategory" resultType="goods">
+        select * from shop_goods where categoryid = #{categoryId} limit #{n};
+    </select>
+
+    <select id="findGoodsOrderBySellTime" parameterType="java.lang.Integer" resultType="goods">
+        select * from shop_goods order by selltime desc limit #{n};
+    </select>
+
+    <select id="findGoodsOrderBySellNum" parameterType="java.lang.Integer" resultType="goods">
+        select * from shop_goods order by sellnum desc limit #{n};
+    </select>
+
+    <select id="findGoodsOrderByRole" parameterType="java.lang.Integer" resultType="goods">
+        select * from shop_goods order by role desc limit #{n};
+    </select>
+
+    <select id="findGoodsById" parameterType="java.lang.String" resultType="goods">
+        select * from shop_goods where id = #{id};
+    </select>
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.doublefloat.fangxxshop.dao.IUserDao">
+    <insert id="addUser" parameterType="user">
+        insert into shop_user values(#{id}, #{name}, #{password}, #{phoneNum}, #{money}, #{avatar}, #{regTime}, #{role}, #{status}, #{email});
+    </insert>
+
+    <delete id="deleteUserById" parameterType="java.lang.String">
+        delete from shop_user where id = #{id};
+    </delete>
+
+    <update id="updateUser" parameterType="user">
+        update shop_user set name = #{name}, password = #{password}, phoneNum = #{phoneNum}, money = #{money}, avatar = #{avatar}, regTime = #{regTime}, role = #{role}, status = #{status}, email = #{email} where id = #{id};
+    </update>
+
+    <update id="updateUserMoney">
+        update shop_user set money = #{money} where id = #{id};
+    </update>
+
+    <update id="updateAvatar">
+        update shop_user set avatar = #{avatar} where id = #{id};
+    </update>
+
+    <update id="updatePassword">
+        update shop_user set password = #{password} where id = #{id};
+    </update>
+
+    <update id="updateUserStatus">
+        update shop_user set status = #{status} where id = #{id};
+    </update>
+
+    <update id="updateUserRole">
+        update shop_user set role = #{role} where id = #{id};
+    </update>
+
+    <select id="findUserById" parameterType="java.lang.String" resultType="user">
+        select * from shop_user where id = #{id};
+    </select>
+
+    <select id="findAllUsers" resultType="user">
+        select * from shop_user;
+    </select>
+
+    <select id="findUserByUsernameAndPassword" resultType="user">
+        select * from shop_user where name = #{username} and password = #{password};
+    </select>
+
+    <select id="findUserNameNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from shop_user where name = #{name}
+    </select>
+
+
+</mapper>
